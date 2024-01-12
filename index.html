@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-around;
+            padding: 2em;
+        }
+
+        section {
+            background-color: white;
+            padding: 1em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex: 1;
+            margin: 0 1em;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        input, button {
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Schedule</h2>
+            <ul id="scheduleList"></ul>
+        </section>
+        <section>
+            <h2>Assignments</h2>
+            <ul id="assignmentList"></ul>
+        </section>
+        <section>
+            <h2>To-Do List</h2>
+            <ul id="todoList"></ul>
+            <input type="text" id="taskInput" placeholder="Add a new task">
+            <button onclick="addTask()">Add Task</button>
+        </section>
+    </main>
+
+    <script>
+        // Sample data
+        const scheduleData = ['Math - 9:00 AM', 'History - 11:00 AM', 'English - 2:00 PM'];
+        const assignmentData = ['Submit Math Homework', 'Read Chapter 5 for History'];
+        const todoListData = ['Buy groceries', 'Finish project'];
+
+        // Display data on the dashboard
+        function displayData() {
+            displayList('scheduleList', scheduleData);
+            displayList('assignmentList', assignmentData);
+            displayList('todoList', todoListData);
+        }
+
+        function displayList(listId, data) {
+            const list = document.getElementById(listId);
+            list.innerHTML = '';
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+
+        // Add a new task to the to-do list
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const newTask = taskInput.value.trim();
+            if (newTask !== '') {
+                todoListData.push(newTask);
+                displayData();
+                taskInput.value = '';
+            }
+        }
+
+        // Initial display
+        displayData();
+    </script>
+</body>
+</html>
